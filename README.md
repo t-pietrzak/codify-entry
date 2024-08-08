@@ -49,3 +49,5 @@ export default tseslint.config({
 })
 ```
 All dependencies were added as production dependecies because in this project it is easier. In real project the dev dependencies should be used.
+
+All commits will be pushed to main directly since there is only one developer and only one functionality.
