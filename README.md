@@ -51,3 +51,5 @@ export default tseslint.config({
 All dependencies were added as production dependecies because in this project it is easier. In real project the dev dependencies should be used.
 
 All commits will be pushed to main directly since there is only one developer and only one functionality.
+
+Unit test should be done for TransactionChart - I would perform them in Jest. I would provide empty options for eCharts, wrong option for eCharts and some mock options for eCharts. As the results I would expect accordingly empty chart, error and chart with the data.
