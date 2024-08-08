@@ -1,24 +1,52 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css'
 import { useFetchApi } from './hooks/useFetchApi'
 import type { EChartsOption } from "echarts";
 import { TransactionChart } from './components/TransactionChart';
 import { MenuItem, Select } from '@mui/material';
 
+const EMPTY_OPTIONS = {
+  title: {},
+  tooltip: {},
+  xAxis: {},
+  yAxis: {},
+  series: []
+}
+
 function App() {
   // empty options were provided in order to prevent chart form runtime errors
-  const [options, setOptions] = useState<EChartsOption>({
-    title: {},
-    tooltip: {},
-    xAxis: {},
-    yAxis: {},
-    series: []
-  });
+  const [options, setOptions] = useState<EChartsOption>(EMPTY_OPTIONS);
 
   const [refetchInterval, setRefetchInterval] = useState<number>();
   const [symbol, setSymbol] = useState<string>('BTCUSDT');
+  // Binance api allow us to use WS endpoint but in this case I wanted to keep things simple. Probalby in live project WS should be used.
+  const {data, error, isLoading} = useFetchApi(symbol, refetchInterval);
 
-  const {data, error, isFetching, isLoading} = useFetchApi(symbol, refetchInterval);
+  useEffect(() => {
+    if(data) {
+      setOptions({
+        title: {
+          text: 'Trade prices - historical data'
+        },
+        tooltip: {},
+        xAxis: {
+          type: 'category',
+          data: data.map(dataElement => dataElement.T),
+          name: 'Time'
+        },
+        yAxis: {
+          name: 'Values'
+        },
+        series: [{
+          name: 'Price',
+          type: 'bar',
+          data: data.map(dataElement => dataElement.p)
+      }]
+      })
+    } else {
+      setOptions(EMPTY_OPTIONS)
+    }
+  }, [data])
 
 
   // in perfect world react portal should be use to create modal with information about api error
@@ -52,7 +80,7 @@ function App() {
         </Select>
       </div>
       <div style={{height: "900px", width: "900px"}}>
-        <TransactionChart option={options} loading={isFetching || isLoading}/>
+        <TransactionChart option={options} loading={isLoading}/>
       </div>
     </>
   )
