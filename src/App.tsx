@@ -13,7 +13,7 @@ function App() {
   }
 
   return (
-    <div>
+    <div style={{height: "900px", width: "900px"}}>
       Data were pulled successfuly
     </div>
   )

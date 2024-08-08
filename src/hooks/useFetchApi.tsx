@@ -1,5 +1,6 @@
 // this hook is created in order to exclude logic from component
 // tanstack-query was used in order to handle errors and refetching strategy. additionaly I never used tanstack-query in project that will have CR
+// type guard could be a good idea here
 
 import { useQuery } from "@tanstack/react-query";
 

@@ -1,3 +1,5 @@
+// error boundry should be used in production - for this test it will consume to much time
+
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import App from './App.tsx'
