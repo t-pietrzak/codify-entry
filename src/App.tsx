@@ -74,6 +74,7 @@ function App() {
           onChange={(e) => {setRefetchInterval(e.target.value)}}
           placeholder='Refetch Interval'
         >
+          <MenuItem value={undefined}>No Interval</MenuItem>
           <MenuItem value={1000}>1s</MenuItem>
           <MenuItem value={2000}>2s</MenuItem>
           <MenuItem value={3000}>3s</MenuItem>
