@@ -22,6 +22,7 @@ function App() {
   // Binance api allow us to use WS endpoint but in this case I wanted to keep things simple. Probalby in live project WS should be used.
   const {data, error, isLoading} = useFetchApi(symbol, refetchInterval);
 
+  // it's possible that setting options should also be moved to custom hook. in that case useFetchApi should change name and provide fetching data and creating options.
   useEffect(() => {
     if(data) {
       setOptions({
