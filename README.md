@@ -48,3 +48,4 @@ export default tseslint.config({
   },
 })
 ```
+All dependencies were added as production dependecies because in this project it is easier. In real project the dev dependencies should be used.
